@@ -1,4 +1,4 @@
-package algorithm
+package search
 
 // 简单查找
 func simpleSearch(list []int, target int) int {

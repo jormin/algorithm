@@ -1,4 +1,4 @@
-package algorithm
+package search
 
 // 二分查找
 func binarySearch(list []int, target int) int {

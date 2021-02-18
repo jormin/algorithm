@@ -158,6 +158,118 @@ func TestDijkstra(t *testing.T) {
 			},
 			want: []string{"start", "b", "f", "g", "final"},
 		},
+		{
+			name: "03",
+			args: args{
+				graph: map[string]map[string]int{
+					"start": {
+						"a": 5,
+						"b": 2,
+					},
+					"a": {
+						"c": 4,
+						"d": 2,
+					},
+					"b": {
+						"a": 8,
+						"d": 7,
+					},
+					"c": {
+						"d":     6,
+						"final": 3,
+					},
+					"d": {
+						"final": 2,
+					},
+					"final": {},
+				},
+				costs: map[string]int{
+					"a":     5,
+					"b":     2,
+					"c":     -1,
+					"d":     -1,
+					"final": -1,
+				},
+				parents: map[string]string{
+					"a":     "start",
+					"b":     "start",
+					"c":     "a",
+					"d":     "",
+					"final": "",
+				},
+			},
+			want: []string{"start", "a", "d", "final"},
+		},
+		{
+			name: "04",
+			args: args{
+				graph: map[string]map[string]int{
+					"start": {
+						"a": 10,
+					},
+					"a": {
+						"c": 20,
+					},
+					"b": {
+						"a": 1,
+					},
+					"c": {
+						"b":     1,
+						"final": 30,
+					},
+					"final": {},
+				},
+				costs: map[string]int{
+					"a":     10,
+					"b":     -1,
+					"c":     -1,
+					"final": -1,
+				},
+				parents: map[string]string{
+					"a":     "start",
+					"b":     "c",
+					"c":     "a",
+					"final": "c",
+				},
+			},
+			want: []string{"start", "a", "c", "final"},
+		},
+		{
+			name: "05",
+			args: args{
+				graph: map[string]map[string]int{
+					"start": {
+						"a": 2,
+						"b": 2,
+					},
+					"a": {
+						"b": 2,
+					},
+					"b": {
+						"c":     2,
+						"final": 2,
+					},
+					"c": {
+						"a":     -1,
+						"final": 2,
+					},
+					"final": {},
+				},
+				costs: map[string]int{
+					"a":     2,
+					"b":     2,
+					"c":     -1,
+					"final": -1,
+				},
+				parents: map[string]string{
+					"a":     "start",
+					"b":     "start",
+					"c":     "",
+					"final": "",
+				},
+			},
+			want: []string{"start", "b", "final"},
+		},
 	}
 	for _, tt := range tests {
 		t.Run(
